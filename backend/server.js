@@ -4,6 +4,8 @@ const swaggerUi = require('swagger-ui-express');
 
 const formRoutes =require("./routes/formRoutes")
 const dotenv = require('dotenv');
+const userRoutes = require('./routes/userRoute');
+const authRoutes = require('./routes/auth');
 const cors = require("cors");
 
 
@@ -49,6 +51,8 @@ app.use("/api", formRoutes);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+app.use('/api/user', authRoutes);
+app.use('/api/users', userRoutes);
 
 // Démarrer le serveur
 app.listen(PORT, () => {
