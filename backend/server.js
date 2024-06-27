@@ -1,11 +1,17 @@
 const express = require('express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const mongoose = require('mongoose'); // Ajout de l'import de mongoose
+const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const routes = require('./routes');
+
 dotenv.config();
+
+if (!process.env.MONGO_URI) {
+    console.error('MONGO_URI not defined in .env file');
+    process.exit(1);
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,7 +33,7 @@ const swaggerOptions = {
             version: '1.0.0',
         },
     },
-    apis: ['./routes/*.js'], // chemin vers les fichiers où se trouvent vos routes
+    apis: ['./routes/*.js'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
