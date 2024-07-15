@@ -2,7 +2,6 @@ const Article = require('../models/articleModel');
 const fs = require('fs');
 
 
-
 exports.createArticle = async (req, res) => {
     const { titre, texte } = req.body;
     const idAdmin = req.admin._id;
