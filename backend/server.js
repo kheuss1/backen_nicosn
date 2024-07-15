@@ -43,16 +43,14 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/api', routes);
 
 // Connexion à MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log('Connected to MongoDB');
-    // Démarrer le serveur après la connexion réussie à MongoDB
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-}).catch(err => {
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log('Connected to MongoDB');
+        // Démarrer le serveur après la connexion réussie à MongoDB
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    }).catch(err => {
     console.error('Failed to connect to MongoDB', err);
     process.exit(1);
 });
